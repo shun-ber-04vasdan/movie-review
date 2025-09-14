@@ -1,0 +1,24 @@
+﻿# Node
+node_modules/
+npm-debug.log*
+pnpm-lock.yaml
+yarn.lock
+
+# Next.js
+.apps/
+.next/
+out/
+
+# NestJS
+dist/
+
+# Env
+.env
+.env.*
+apps/**/.env
+prisma/dev.db
+
+# OS/Editor
+.DS_Store
+Thumbs.db
+.vscode/
