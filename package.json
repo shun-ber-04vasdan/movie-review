@@ -1,0 +1,19 @@
+{
+  "name": "movie-review",
+  "private": true,
+  "workspaces": ["apps/*"],
+  "scripts": {
+    "dev": "concurrently -n web,api -c auto \"npm:dev:web\" \"npm:dev:api\"",
+    "dev:web": "npm --workspace @movie/web run dev",
+    "dev:api": "npm --workspace @movie/api run start:dev",
+    "build": "npm run build:web && npm run build:api",
+    "build:web": "npm --workspace @movie/web run build",
+    "build:api": "npm --workspace @movie/api run build",
+    "lint": "npm -ws run lint",
+    "format": "npm -ws run format",
+    "typecheck": "npm -ws run typecheck"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  }
+}
