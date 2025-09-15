@@ -1,0 +1,9 @@
+import { PostsService } from './posts.service';
+import type { PostType } from './post.interface';
+export declare class PostsController {
+    private readonly postsService;
+    constructor(postsService: PostsService);
+    findAll(): PostType[];
+    create(post: PostType): void;
+    findById(id: string): PostType | undefined;
+}
