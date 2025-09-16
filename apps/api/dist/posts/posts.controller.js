@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PostsController = void 0;
 const common_1 = require("@nestjs/common");
 const posts_service_1 = require("./posts.service");
+const create_post_dto_1 = require("./dto/create-post.dto");
 let PostsController = class PostsController {
     postsService;
     constructor(postsService) {
@@ -23,8 +24,8 @@ let PostsController = class PostsController {
     findAll() {
         return this.postsService.findAll();
     }
-    create(post) {
-        this.postsService.create(post);
+    create(dto) {
+        return this.postsService.create(dto);
     }
     findById(id) {
         return this.postsService.findById(id);
@@ -35,21 +36,21 @@ __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], PostsController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [create_post_dto_1.CreatePostDto]),
+    __metadata("design:returntype", Promise)
 ], PostsController.prototype, "create", null);
 __decorate([
-    (0, common_1.Get)(":id"),
-    __param(0, (0, common_1.Param)("id")),
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Object)
+    __metadata("design:returntype", Promise)
 ], PostsController.prototype, "findById", null);
 exports.PostsController = PostsController = __decorate([
     (0, common_1.Controller)('posts'),
