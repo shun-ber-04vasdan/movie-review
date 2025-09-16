@@ -1,7 +1,8 @@
 export interface PostType {
     id: string;
     title: string;
-    content: string;
-    author: string;
-    createdAt: string;
+    body?: string | null;
+    slug: string;
+    createdAt: Date;   // PrismaはDate型で返す
+    updatedAt: Date;
 }
