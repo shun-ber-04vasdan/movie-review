@@ -1,9 +1,37 @@
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import {
+  ArrayMaxSize,
+  IsArray,
+  IsNumber,
+  IsOptional,
+  isString,
+  IsString,
+  IsUrl,
+  Max,
+  Min,
+} from 'class-validator';
 
 export class CreatePostDto {
-  @IsString() @IsNotEmpty()
-  title!: string;
+  @IsString()
+  movieTitle!: string;
 
-  @IsString() @IsOptional()
-  body?: string;
+  @IsUrl() @IsOptional()
+  thumbnailUrl?: string;
+
+  @IsNumber()
+  @Min(0)
+  @Max(5)
+  score!: number;
+
+  @IsOptional()
+  @IsString()
+  comment?: string;
+
+  @IsOptional()
+  @IsArray()
+  @ArrayMaxSize(20)
+  @IsString({ each: true })
+  starring?: string[];
+
+  @IsString()
+  author!: string;
 }

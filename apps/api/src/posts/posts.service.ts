@@ -21,11 +21,15 @@ export class PostsService {
   }
 
   async create(dto: CreatePostDto): Promise<Post> {
-    const slug = toSlug(dto.title);
+    const slug = toSlug(dto.movieTitle);
     const created = await this.prisma.post.create({
       data: {
-        title: dto.title,
-        body: dto.body ?? null,
+        movieTitle: dto.movieTitle,
+        thumbnailUrl: dto.thumbnailUrl,
+        score: dto.score,
+        comment: dto.comment,
+        starring: dto.starring ?? [],
+        author: dto.author,
         slug,
       },
     });

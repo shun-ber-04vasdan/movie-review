@@ -11,10 +11,14 @@ datasource db {
 }
 
 model Post {
-  id        String   @id @default(cuid())
-  title     String
-  body      String?
-  slug      String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           String   @id @default(cuid())
+  movieTitle   String
+  thumbnailUrl String?               // 画像URL（将来アップロードに拡張可）
+  score        Float                 // 0〜5 を想定（バリデーションはDTOで）
+  comment      String?
+  starring     Json      @default("[]") // ← SQLite互換のためJsonで配列を持つ（後述）
+  author       String
+  slug         String   @unique
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
