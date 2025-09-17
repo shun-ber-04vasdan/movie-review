@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { PostType } from './post.interface';
+import { Post } from '@prisma/client';
 import { CreatePostDto } from './dto/create-post.dto';
 
 // 簡易slug（ESMのslugifyで詰まらないように自作）
@@ -16,13 +16,11 @@ const toSlug = (s: string) =>
 export class PostsService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async findAll(): Promise<PostType[]> {
-    return this.prisma.post.findMany({
-      orderBy: { createdAt: 'desc' },
-    }) as unknown as PostType[];
+  async findAll(): Promise<Post[]> {
+    return this.prisma.post.findMany({ orderBy: { createdAt: 'desc' } });
   }
 
-  async create(dto: CreatePostDto): Promise<PostType> {
+  async create(dto: CreatePostDto): Promise<Post> {
     const slug = toSlug(dto.title);
     const created = await this.prisma.post.create({
       data: {
@@ -31,11 +29,11 @@ export class PostsService {
         slug,
       },
     });
-    return created as unknown as PostType;
+    return created as unknown as Post;
   }
 
-  async findById(id: string): Promise<PostType | undefined> {
+  async findById(id: string): Promise<Post | undefined> {
     const found = await this.prisma.post.findUnique({ where: { id } });
-    return found as unknown as PostType | undefined;
+    return found as unknown as Post | undefined;
   }
 }

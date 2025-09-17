@@ -24,9 +24,7 @@ let PostsService = class PostsService {
         this.prisma = prisma;
     }
     async findAll() {
-        return this.prisma.post.findMany({
-            orderBy: { createdAt: 'desc' },
-        });
+        return this.prisma.post.findMany({ orderBy: { createdAt: 'desc' } });
     }
     async create(dto) {
         const slug = toSlug(dto.title);
